@@ -21,12 +21,12 @@
 
       <!-- maps -->
       <script src="/js/world_countries_mercator.js" charset="utf-8"></script>
-      <script src="/js/main.js" charset="utf-8"></script>
+      <!-- <script src="/js/main.js" charset="utf-8"></script> -->
 
       <script>
-        $.getJSON('/getMap', (data) => {
+        $.getJSON('/getMap', function(data) {
           console.log(data)
-          $(".mapcontainer").append(data)
+          $(".mapcontainer").mapael(JSON.parse(data))
         })
       </script>
   </head>
@@ -44,6 +44,11 @@
         <button><a href="/account/login">Log In</a></button>
         <button><a href="/account/signup">Sign Up</a></button>
         <button><a href="/account/logout">Log Out</a></button>
+        <br><br><br><p style="color: White; width: 340px; margin-left: 20px;">The map loaded here is parsed from a JSON file!
+          (each user will have their own JSON file corresponding to their map) <br>
+          Next I have to figure out how to add back the event listeners that were not written into the JSON
+          (I had it so that when you double click on a country, you would color it a different color).
+          I also have to store these JSON files in my database with their respective users </p>
       </div>
     </div>
 
