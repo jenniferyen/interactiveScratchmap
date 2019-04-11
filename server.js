@@ -62,34 +62,39 @@ var obj =
       attrsHover: {
         fill: "#ffae1a"
       },
-      eventHandlers: {
-        dblclick: function (e, id, mapElem, textElem) {
-          var newData = {
-            'areas': {}
-          };
-          // if color is original, change to new
-          if (mapElem.originalAttrs.fill == "AliceBlue") {
-            newData.areas[id] = {
-              attrs: {
-                fill: "LightSeaGreen"
-              }
-            };
-          // if color is new, change to original
-          } else {
-            newData.areas[id] = {
-              attrs: {
-                fill: "AliceBlue"
-              }
-            };
-          }
-          $(".mapcontainer").trigger('update', [{mapOptions: newData}]);
-        }
-      },
+      // eventHandlers: {
+      //   dblclick: function (e, id, mapElem, textElem) {
+      //     var newData = {
+      //       'areas': {}
+      //     };
+      //     // if color is original, change to new
+      //     if (mapElem.originalAttrs.fill == "AliceBlue") {
+      //       newData.areas[id] = {
+      //         attrs: {
+      //           fill: "LightSeaGreen"
+      //         }
+      //       };
+      //     // if color is new, change to original
+      //     } else {
+      //       newData.areas[id] = {
+      //         attrs: {
+      //           fill: "AliceBlue"
+      //         }
+      //       };
+      //     }
+      //     $(".mapcontainer").trigger('update', [{mapOptions: newData}]);
+      //   }
+      // },
     }
   }
 }
 let data = JSON.stringify(obj, null, 2)
-fs.writeFileSync('personal-map.json', data)
+fs.writeFileSync('personalMap.json', data)
+
+app.get('/getMap', function(req, res) {
+  const out = fs.readdirSync('./maps')
+  res.json(out)
+});
 
 // listening on port 3000
 app.listen(3000, function () {
