@@ -12,7 +12,7 @@ var isAuthenticated = require('./middlewares/isAuthenticated');
 var app = express();
 
 // connect to mongoose
-mongoose.connect('mongodb+srv://cis197-final-user:cis197-final-password@cis197-final-nfk6f.mongodb.net/test?retryWrites=true')
+mongoose.connect('mongodb+srv://final:<final-password>@cis197-final-saq3u.mongodb.net/test?retryWrites=true')
 
 // set the express view engine to take care of ejs within html files
 app.engine('html', require('ejs').__express);
