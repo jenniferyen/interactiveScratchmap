@@ -26,7 +26,30 @@
       <script>
         $.getJSON('/getMap', function(data) {
           console.log(data)
-          $(".mapcontainer").mapael(JSON.parse(data))
+          var obj = JSON.parse(data)
+          obj.map.defaultArea.eventHandlers.dblclick = function (e, id, mapElem, textElem) {
+            var newData = {
+              'areas': {}
+            };
+            // if color is original, change to new
+            if (mapElem.originalAttrs.fill == "AliceBlue") {
+              newData.areas[id] = {
+                attrs: {
+                  fill: "LightSeaGreen"
+                }
+              };
+            // if color is new, change to original
+            } else {
+              newData.areas[id] = {
+                attrs: {
+                  fill: "AliceBlue"
+                }
+              };
+            }
+            $(".mapcontainer").trigger('update', [{mapOptions: newData}]);
+          }
+          console.log(obj)
+          $(".mapcontainer").mapael(obj)
         })
       </script>
   </head>

@@ -62,7 +62,10 @@ var obj =
       attrsHover: {
         fill: "#ffae1a"
       },
-      // eventHandlers: {
+      eventHandlers: {
+        dbclick: {
+
+        }
       //   dblclick: function (e, id, mapElem, textElem) {
       //     var newData = {
       //       'areas': {}
@@ -84,7 +87,7 @@ var obj =
       //     }
       //     $(".mapcontainer").trigger('update', [{mapOptions: newData}]);
       //   }
-      // },
+      }
     }
   }
 }
