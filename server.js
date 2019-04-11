@@ -3,7 +3,6 @@ var path = require('path');
 var bodyParser = require('body-parser')
 var cookieSession = require('cookie-session');
 var mongoose = require('mongoose');
-var fs = require('fs')
 
 var accountRoutes = require('./routes/account');
 var isAuthenticated = require('./middlewares/isAuthenticated');
@@ -42,61 +41,6 @@ app.use(function (err, req, res, next) {
 // home route
 app.get('/', function(req, res) {
   res.render('index', { user: req.session.user })
-});
-
-// TO DO: read and write personal maps
-var obj =
-{
-  map: {
-    name: "world_countries_mercator",
-    zoom: {
-      enabled: true,
-      maxLevel: 20,
-    },
-    defaultArea: {
-      attrs: {
-        fill: "AliceBlue",
-        stroke: "#99c7ff",
-        cursor: "pointer"
-      },
-      attrsHover: {
-        fill: "#ffae1a"
-      },
-      eventHandlers: {
-        dbclick: {
-
-        }
-      //   dblclick: function (e, id, mapElem, textElem) {
-      //     var newData = {
-      //       'areas': {}
-      //     };
-      //     // if color is original, change to new
-      //     if (mapElem.originalAttrs.fill == "AliceBlue") {
-      //       newData.areas[id] = {
-      //         attrs: {
-      //           fill: "LightSeaGreen"
-      //         }
-      //       };
-      //     // if color is new, change to original
-      //     } else {
-      //       newData.areas[id] = {
-      //         attrs: {
-      //           fill: "AliceBlue"
-      //         }
-      //       };
-      //     }
-      //     $(".mapcontainer").trigger('update', [{mapOptions: newData}]);
-      //   }
-      }
-    }
-  }
-}
-let data = JSON.stringify(obj, null, 2)
-fs.writeFileSync('maps/personalMap.json', data)
-
-app.get('/getMap', function(req, res) {
-  const out = fs.readFileSync('./maps/personalMap.json', 'utf-8')
-  res.json(out)
 });
 
 // listening on port 3000

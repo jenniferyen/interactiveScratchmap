@@ -24,7 +24,7 @@
       <!-- <script src="/js/main.js" charset="utf-8"></script> -->
 
       <script>
-        $.getJSON('/getMap', function(data) {
+        $.getJSON('/account/getMap', function(data) {
           console.log(data)
           var obj = JSON.parse(data)
           obj.map.defaultArea.eventHandlers.dblclick = function (e, id, mapElem, textElem) {
@@ -70,10 +70,8 @@
         <br><br><br><p style="color: White; width: 340px; margin-left: 20px;">
           The personal map loaded here is parsed from a JSON file that I wrote the original map to.
           (each user will have their own JSON file corresponding to their map) <br>
-          Next I have to figure out how to add back the event listeners that were not written into the JSON
-          (I had it so that when you double click on a country, you would color it a different color).
-          <br>If you want to see this functionality, uncomment line 24 and comment out lines 26-31 in index.html<br>
-          I also have to store these JSON files in my database with their respective users </p>
+          When you double click on a country, you can color it a different color.
+          <br> I now have to figure out how to store these JSON files in my database with their respective users </p>
       </div>
     </div>
 

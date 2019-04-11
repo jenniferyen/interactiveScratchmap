@@ -14,9 +14,7 @@
       "attrsHover": {
         "fill": "#ffae1a"
       },
-      "eventHandlers": {
-        "dbclick": {}
-      }
+      "eventHandlers": {}
     }
   }
 }
