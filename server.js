@@ -89,7 +89,7 @@ var obj =
   }
 }
 let data = JSON.stringify(obj, null, 2)
-fs.writeFileSync('personalMap.json', data)
+fs.writeFileSync('maps/personalMap.json', data)
 
 app.get('/getMap', function(req, res) {
   const out = fs.readdirSync('./maps')
