@@ -22,7 +22,10 @@ router.post('/signup', function (req, res, next) {
               // console.log(results);
               next(new Error('User exists! Please try another username.'));
             } else {
-              var user = new User({username: username, password: password})
+              var map = createMap(obj)
+              var user = new User({username: username, password: password, map: map})
+              // console.log(map)
+              // console.log('created new user')
               user.save(function (err, result) {
                 if (!err) {
                   res.redirect('/') // redirect to home
@@ -45,6 +48,8 @@ router.get('/login', function (req, res) {
   res.render('login');
 });
 
+var map = {}
+
 router.post('/login', function (req, res, next) {
     var {username, password} = req.body;
     User.findOne({username: username, password: password}, function (err, result) {
@@ -54,27 +59,28 @@ router.post('/login', function (req, res, next) {
             next(new Error('incorrect credentials'));
         } else {
             req.session.user = result.username
+            // console.log(map)
+            map = result.map
             res.redirect('/'); // redirect to home
         }
     })
 });
 
 router.get('/logout', isAuthenticated, function (req, res, next) {
-    req.session.user = '';
-    res.redirect('/');
-    
+  req.session.user = '';
+  res.redirect('/');
 })
 
-// app.post("/addname", (req, res) => {
-//  var myData = new User(req.body);
-//  myData.save()
-//  .then(item => {
-//  res.send("item saved to database");
-//  })
-//  .catch(err => {
-//  res.status(400).send("unable to save to database");
-//  });
-// });
+router.get('/save', isAuthenticated, function(req, res, next) {
+  User.findOneAndUpdate({username: req.session.user, password: req.session.password}, {$set: {"map": req.session.map}},
+  {new: true}, function(err, result) {
+    if (err) {
+      next(err)
+    } else {
+      console.log('sucessfully updated')
+    }
+  })
+})
 
 // TO DO: read and write personal maps
 var obj =
@@ -95,37 +101,33 @@ var obj =
         fill: "#ffae1a"
       },
       eventHandlers: {
-      //   dblclick: function (e, id, mapElem, textElem) {
-      //     var newData = {
-      //       'areas': {}
-      //     };
-      //     // if color is original, change to new
-      //     if (mapElem.originalAttrs.fill == "AliceBlue") {
-      //       newData.areas[id] = {
-      //         attrs: {
-      //           fill: "LightSeaGreen"
-      //         }
-      //       };
-      //     // if color is new, change to original
-      //     } else {
-      //       newData.areas[id] = {
-      //         attrs: {
-      //           fill: "AliceBlue"
-      //         }
-      //       };
-      //     }
-      //     $(".mapcontainer").trigger('update', [{mapOptions: newData}]);
-      //   }
       }
+    },
+    defaultPlot: {
+      // INSERT
     }
+  },
+  plots: {
+    // INSERT
   }
 }
-let data = JSON.stringify(obj, null, 2)
-fs.writeFileSync('maps/personalMap.json', data)
 
-router.get('/getMap', function(req, res) {
-  const out = fs.readFileSync('./maps/personalMap.json', 'utf-8')
-  res.json(out)
+var data = ''
+
+function createMap(obj) {
+  data = JSON.stringify(obj, null, 2)
+  console.log('created new map')
+  return data
+}
+// console.log(createMap(obj))
+// fs.writeFileSync('maps/personalMap.json', data)
+
+router.get('/getMap', isAuthenticated, function (req, res, next) {
+  // const out = fs.readFileSync('./maps/personalMap.json', 'utf-8')
+  // res.json(out)
+  var obj = JSON.parse(map)
+  // console.log(obj)
+  res.send(obj)
 });
 
 module.exports = router;

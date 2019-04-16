@@ -24,10 +24,9 @@
       <!-- <script src="/js/main.js" charset="utf-8"></script> -->
 
       <script>
-        $.getJSON('/account/getMap', function(data) {
+        $.get('/account/getMap', function(data) {
           console.log(data)
-          var obj = JSON.parse(data)
-          obj.map.defaultArea.eventHandlers.dblclick = function (e, id, mapElem, textElem) {
+          data.map.defaultArea.eventHandlers.dblclick = function (e, id, mapElem, textElem) {
             var newData = {
               'areas': {}
             };
@@ -48,8 +47,8 @@
             }
             $(".mapcontainer").trigger('update', [{mapOptions: newData}]);
           }
-          console.log(obj)
-          $(".mapcontainer").mapael(obj)
+          // console.log(obj)
+          $(".mapcontainer").mapael(data)
         })
       </script>
   </head>
@@ -67,11 +66,7 @@
         <button><a href="/account/login">Log In</a></button>
         <button><a href="/account/signup">Sign Up</a></button>
         <button><a href="/account/logout">Log Out</a></button>
-        <br><br><br><p style="color: White; width: 340px; margin-left: 20px;">
-          The personal map loaded here is parsed from a JSON file that I wrote the original map to.
-          (each user will have their own JSON file corresponding to their map) <br>
-          When you double click on a country, you can color it a different color.
-          <br> I now have to figure out how to store these JSON files in my database with their respective users </p>
+        <button><a href="/account/save">Save Map</a></button>
       </div>
     </div>
 
