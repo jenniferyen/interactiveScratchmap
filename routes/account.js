@@ -127,7 +127,7 @@ var obj =
       longitude: -151.770538,
       value: 700000,
       tooltip: {content: "Bora Bora"},
-      href: "animations/fish"
+      href: "/animations/fish"
     },
     'Masai Mara Reserve, Kenya': {
       type: "circle",
@@ -136,7 +136,7 @@ var obj =
       longitude: 34.9714,
       value: 700000,
       tooltip: {content: "Masai Mara Reserve, Kenya"},
-      href: "animations/lion"
+      href: "/animations/lion"
     }
   }
 }

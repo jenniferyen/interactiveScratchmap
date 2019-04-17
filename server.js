@@ -34,6 +34,7 @@ app.use('/account', accountRoutes);
 // load CSS and JS
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/js', express.static(__dirname + '/js'));
+app.use('/animations', express.static(__dirname + '/animations'));
 
 app.use(function (err, req, res, next) {
   return res.send('ERROR :  ' + err.message)
