@@ -71,13 +71,15 @@ router.get('/logout', isAuthenticated, function (req, res, next) {
   res.redirect('/');
 })
 
-router.get('/save', isAuthenticated, function(req, res, next) {
-  User.findOneAndUpdate({username: req.session.user, password: req.session.password}, {$set: {"map": req.session.map}},
+router.post('/save', isAuthenticated, function(req, res, next) {
+  User.findOneAndUpdate({username: req.session.user, password: req.session.password}, {$set: {"map": req.body.map}},
   {new: true}, function(err, result) {
     if (err) {
       next(err)
     } else {
+      console.log(req.body.map)
       console.log('sucessfully updated')
+      res.redirect('/')
     }
   })
 })

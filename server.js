@@ -45,7 +45,6 @@ app.get('/', function(req, res) {
   res.render('index', { user: req.session.user })
 });
 
-
 // redirect to three.js animations
 
 app.get('/animations/fish', function(req, res) {
