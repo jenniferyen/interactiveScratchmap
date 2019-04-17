@@ -16,28 +16,7 @@ var obj =
         fill: "#ffae1a"
       },
       eventHandlers: {
-        dblclick: function (e, id, mapElem, textElem) {
-          var newData = {
-            'areas': {}
-          };
-          // if color is original, change to new
-          if (mapElem.originalAttrs.fill == "AliceBlue") {
-            newData.areas[id] = {
-              attrs: {
-                fill: "LightSeaGreen"
-              }
-            };
-          // if color is new, change to original
-          } else {
-            newData.areas[id] = {
-              attrs: {
-                fill: "AliceBlue"
-              }
-            };
-          }
-          $(".mapcontainer").trigger('update', [{mapOptions: newData}]);
-        }
-      },
+      }
     },
     defaultPlot: {
       attrs: {
@@ -57,45 +36,23 @@ var obj =
     }
   },
   plots: {
-    'barcelona': {
+    'Bora Bora': {
       type: "circle",
-      size: 10,
-      latitude: 41.38879,
-      longitude: 2.15899,
+      size: 15,
+      latitude: -16.499701,
+      longitude: -151.770538,
       value: 700000,
-      tooltip: {content: "<span style=\"font-weight:bold;\">City :</span> Barcelona"},
-      text: {content: "Barcelona"},
-      href: "https://en.wikipedia.org/wiki/Barcelona"
+      tooltip: {content: "Bora Bora"},
+      href: "animations/fish"
     },
-    'berlin': {
+    'Masai Mara Reserve, Kenya': {
       type: "circle",
-      size: 10,
-      latitude: 52.52437,
-      longitude: 13.41053,
+      size: 15,
+      latitude: 1.3210,
+      longitude: 34.9714,
       value: 700000,
-      tooltip: {content: "<span style=\"font-weight:bold;\">City :</span> Berlin"},
-      text: {content: "Berlin"},
-      href: "https://en.wikipedia.org/wiki/Berlin"
-    },
-    'edinburgh': {
-      type: "circle",
-      size: 10,
-      latitude: 55.95206,
-      longitude: -3.19648,
-      value: 700000,
-      tooltip: {content: "<span style=\"font-weight:bold;\">City :</span> Edinburgh"},
-      text: {content: "Edinburgh"},
-      href: "https://en.wikipedia.org/wiki/Edinburgh"
-    },
-    'taipei': {
-      type: "circle",
-      size: 10,
-      latitude: 25.04776,
-      longitude: 121.53185,
-      value: 700000,
-      tooltip: {content: "<span style=\"font-weight:bold;\">City :</span> Taipei"},
-      text: {content: "Taipei"},
-      href: "https://en.wikipedia.org/wiki/Taipei"
+      tooltip: {content: "Masai Mara Reserve, Kenya"},
+      href: "animations/lion"
     }
   }
 }

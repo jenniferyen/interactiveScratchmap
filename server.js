@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser')
 var cookieSession = require('cookie-session');
 var mongoose = require('mongoose');
+var fs = require('fs')
 
 var accountRoutes = require('./routes/account');
 var isAuthenticated = require('./middlewares/isAuthenticated');
@@ -42,6 +43,25 @@ app.use(function (err, req, res, next) {
 app.get('/', function(req, res) {
   res.render('index', { user: req.session.user })
 });
+
+
+// redirect to three.js animations
+
+app.get('/animations/fish', function(req, res) {
+  res.sendFile(path.join(__dirname, 'animations/fish.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
+app.get('/animations/lion', function(req, res) {
+  res.sendFile(path.join(__dirname, 'animations/lion.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 // listening on port 3000
 app.listen(3000, function () {
