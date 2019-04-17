@@ -93,8 +93,7 @@ var obj =
     },
     defaultArea: {
       attrs: {
-        fill: "AliceBlue",
-        stroke: "#99c7ff",
+        fill: "#28587B",
         cursor: "pointer"
       },
       attrsHover: {
@@ -105,7 +104,7 @@ var obj =
     },
     defaultPlot: {
       attrs: {
-        fill: "IndianRed",
+        fill: "#ffae1a",
         opacity: 1.0
       },
       attrsHover: {

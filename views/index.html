@@ -12,6 +12,7 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       <!-- own styling -->
       <link rel="stylesheet" type="text/css" href="/css/style.css">
+      <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
 
       <!-- mousewheel, raphael, mapael -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"
@@ -31,17 +32,17 @@
               'areas': {}
             };
             // if color is original, change to new
-            if (mapElem.originalAttrs.fill == "AliceBlue") {
+            if (mapElem.originalAttrs.fill == "#28587B") {
               newData.areas[id] = {
                 attrs: {
-                  fill: "LightSeaGreen"
+                  fill: "#C03221"
                 }
               };
             // if color is new, change to original
             } else {
               newData.areas[id] = {
                 attrs: {
-                  fill: "AliceBlue"
+                  fill: "#28587B"
                 }
               };
             }
@@ -56,28 +57,26 @@
   <body>
     <div class="panel">
       <div class="title">
-        <h2 style="color: AliceBlue">Interactive Scratchmap</h2>
+        <h2>Interactive Scratchmap</h2>
         <% if (user) { %>
         <h1> Hi <%= user %> </h1>
         <% } %>
       </div>
 
       <div class="user-buttons">
-        <button><a href="/account/login">Log In</a></button>
-        <button><a href="/account/signup">Sign Up</a></button>
-        <button><a href="/account/logout">Log Out</a></button>
-        <button><a href="/account/save">Save Map</a></button>
+        <button type="button" class="btn btn-outline-info"><a href="/account/login">Log In</a></button>
+        <button type="button" class="btn btn-outline-info"><a href="/account/signup">Sign Up</a></button>
+        <button type="button" class="btn btn-outline-info"><a href="/account/logout">Log Out</a></button>
+        <button type="button" class="btn btn-outline-info"><a href="/account/save">Save Map</a></button>
+        <button type="button" class="btn btn-outline-info"><a href="https://krikienoid.github.io/flagwaver/">Flag Waver</a></button>
       </div>
 
-      <button><a href="https://krikienoid.github.io/flagwaver/">Flag Waver</a></button>
-
-      <br><br><p style="float: left; width: 300px; margin-left: 20px; color: white">Redirecting to the three.js animation is not currently rendering the js.
+      <br><br><p style="float: left; width: 300px; margin-left: 20px">Redirecting to the three.js animation is not currently rendering the js.
         For now, just open the HTML file of the specific animations in your browser.</p>
     </div>
 
     <div class="mapcontainer">
         <div class="map"></div>
-        <div class="credits"><p>created by Jennifer Yen</p></div>
     </div>
   </body>
 

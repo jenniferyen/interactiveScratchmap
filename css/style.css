@@ -1,11 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
 body {
-  background-color: DimGrey;
+  background-color: #F6E4F6;
   color: Black;
-  font-family: Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 45px;
+  text-align: center;
+  text-shadow: 1.3px 1.3px black;
 }
 
 .panel {
   float: left;
+  max-width: 25%;
   -webkit-user-select: none;
   -khtml-user-select : none;
   -moz-user-select: none;
@@ -19,22 +28,11 @@ body {
   margin: 0;
 }
 
-.credits {
-  float: right;
-  margin-top: -10px;
-
-  -webkit-user-select: none;
-  -khtml-user-select : none;
-  -moz-user-select: none;
-  -o-user-select : none;
-  user-select: none;
-}
-
 /* Specific mapael css class are below
  * 'mapael' class is added by plugin
 */
 .mapael .map {
-    background-color: DimGrey;
+    background-color: #F6E4F6;
     margin-bottom: 10px;
     position: relative;
 }
@@ -91,12 +89,6 @@ body {
     color: #fff;
 }
 
-* {
-  margin:0px;
-  padding:0px;
-  font-family:Helvetica, Arial, sans-serif;
-}
-
 input[type=text], input[type=password] {
     width: 90%;
     padding: 12px 20px;
@@ -107,7 +99,7 @@ input[type=text], input[type=password] {
     font-size:16px;
 }
 button {
-    background-color: #4CAF50;
+    background-color: #F4A261;
     color: white;
     padding: 10px 5px;
     margin: 8px 8px;
