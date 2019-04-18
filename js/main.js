@@ -8,8 +8,7 @@ var obj =
     },
     defaultArea: {
       attrs: {
-        fill: "AliceBlue",
-        stroke: "#99c7ff",
+        fill: "#28587B",
         cursor: "pointer"
       },
       attrsHover: {
@@ -20,7 +19,7 @@ var obj =
     },
     defaultPlot: {
       attrs: {
-        fill: "IndianRed",
+        fill: "#ffae1a",
         opacity: 1.0
       },
       attrsHover: {
@@ -35,6 +34,13 @@ var obj =
       }
     }
   },
+  areas: {
+    'RU': {
+      attrs: {
+        fill: "#C03221"
+      }
+    }
+  },
   plots: {
     'Bora Bora': {
       type: "circle",
@@ -43,7 +49,7 @@ var obj =
       longitude: -151.770538,
       value: 700000,
       tooltip: {content: "Bora Bora"},
-      href: "animations/fish"
+      href: "/animations/fish"
     },
     'Masai Mara Reserve, Kenya': {
       type: "circle",
@@ -52,9 +58,31 @@ var obj =
       longitude: 34.9714,
       value: 700000,
       tooltip: {content: "Masai Mara Reserve, Kenya"},
-      href: "animations/lion"
+      href: "/animations/lion"
     }
   }
+}
+
+obj.map.defaultArea.eventHandlers.dblclick = function (e, id, mapElem, textElem) {
+  var newData = {
+    'areas': {}
+  };
+  // if color is original, change to new
+  if (mapElem.originalAttrs.fill == "#28587B") {
+    newData.areas[id] = {
+      attrs: {
+        fill: "#C03221"
+      }
+    };
+  // if color is new, change to original
+  } else {
+    newData.areas[id] = {
+      attrs: {
+        fill: "#28587B"
+      }
+    }
+  }
+  $(".mapcontainer").trigger('update', [{mapOptions: newData}])
 }
 
 $(document).ready(function () {

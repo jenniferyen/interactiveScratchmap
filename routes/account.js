@@ -2,7 +2,10 @@ var express = require('express')
 var router = express.Router();
 const User = require('../models/user.js')
 const isAuthenticated = require('../middlewares/isAuthenticated.js');
-var fs = require('fs')
+var bodyParser = require('body-parser')
+
+// set up bodyParser
+router.use(bodyParser.json({ type: 'application/json' }))
 
 // set up account routes
 router.get('/signup', function (req, res, next) {
@@ -41,7 +44,6 @@ router.post('/signup', function (req, res, next) {
 });
 
 router.get('/login', function (req, res) {
-  // // debug check
   // User.find({}, function (err, results) {
   //   console.log(results)
   // })
@@ -54,14 +56,14 @@ router.post('/login', function (req, res, next) {
     var {username, password} = req.body;
     User.findOne({username: username, password: password}, function (err, result) {
         if (err) {
-            next(err);
+          next(err);
         } else if (!result) {
-            next(new Error('incorrect credentials'));
+          next(new Error('incorrect credentials'));
         } else {
-            req.session.user = result.username
-            // console.log(map)
-            map = result.map
-            res.redirect('/'); // redirect to home
+          req.session.user = result.username
+          map = result.map
+          // console.log(map)
+          res.redirect('/'); // redirect to home
         }
     })
 });
@@ -72,16 +74,22 @@ router.get('/logout', isAuthenticated, function (req, res, next) {
 })
 
 router.post('/save', isAuthenticated, function(req, res, next) {
-  User.findOneAndUpdate({username: req.session.user, password: req.session.password}, {$set: {"map": req.body.map}},
-  {new: true}, function(err, result) {
+  User.findOne({username: req.session.user}, function(err, result) {
     if (err) {
       next(err)
     } else {
-      console.log(req.body.map)
-      console.log('sucessfully updated')
-      res.redirect('/')
+      var temp = JSON.stringify(req.body)
+      console.log(temp)
+      User.updateOne({map: result.map}, {upsert: true}, {$set: {}}, function(err, result) {
+        if (err) {
+            next(err)
+        } else {
+          console.log('sucessfully updated')
+        }
+      })
     }
   })
+  res.direct('/')
 })
 
 // TO DO: read and write personal maps
@@ -121,6 +129,8 @@ var obj =
       }
     }
   },
+  areas: {
+  },
   plots: {
     'Bora Bora': {
       type: "circle",
@@ -143,19 +153,15 @@ var obj =
   }
 }
 
-var data = ''
+var stringifiedMap = ''
 
 function createMap(obj) {
-  data = JSON.stringify(obj, null, 2)
+  stringifiedMap = JSON.stringify(obj, null, 2)
   console.log('created new map')
-  return data
+  return stringifiedMap
 }
-// console.log(createMap(obj))
-// fs.writeFileSync('maps/personalMap.json', data)
 
 router.get('/getMap', isAuthenticated, function (req, res, next) {
-  // const out = fs.readFileSync('./maps/personalMap.json', 'utf-8')
-  // res.json(out)
   var obj = JSON.parse(map)
   // console.log(obj)
   res.send(obj)

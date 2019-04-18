@@ -26,10 +26,8 @@
 
       <script>
 
-        var data = ''
-
         $.get('/account/getMap', function(data) {
-          console.log(data)
+          // console.log(data)
           data.map.defaultArea.eventHandlers.dblclick = function (e, id, mapElem, textElem) {
             var newData = {
               'areas': {}
@@ -47,21 +45,18 @@
                 attrs: {
                   fill: "#28587B"
                 }
-              };
+              }
             }
-            $(".mapcontainer").trigger('update', [{mapOptions: newData}])
+            $(".mapcontainer").trigger('update', [{mapOptions: newData,
+              afterUpdate: function(container, paper, areas, plots, options) {
+                // console.log(newData.areas)
+                $.post('/account/save', newData.areas)
+              }}
+            ])
           }
-          // console.log(obj)
           $(".mapcontainer").mapael(data)
         })
 
-        function saveMap(){
-          $.post('/account/save')
-        }
-
-        $('#save').bind('click', function(e) {
-          e.preventDefault()
-        });
       </script>
   </head>
 
@@ -78,7 +73,6 @@
         <button type="button" class="btn btn-outline-info"><a href="/account/login">Log In</a></button>
         <button type="button" class="btn btn-outline-info"><a href="/account/signup">Sign Up</a></button>
         <button type="button" class="btn btn-outline-info"><a href="/account/logout">Log Out</a></button>
-        <button type="button" class="btn btn-outline-info" id="save"><a onclick="saveMap()">Save Map</a></button>
         <button type="button" class="btn btn-outline-info"><a href="https://krikienoid.github.io/flagwaver/">Flag Waver</a></button>
       </div>
     </div>
