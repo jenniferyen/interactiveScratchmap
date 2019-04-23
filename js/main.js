@@ -88,5 +88,5 @@ obj.map.defaultArea.eventHandlers.dblclick = function (e, id, mapElem, textElem)
 $(document).ready(function () {
   $(".mapcontainer").mapael(
     obj
-  );
-});
+  )
+})
