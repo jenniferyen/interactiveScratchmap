@@ -144,6 +144,11 @@ function createFan(){
   scene.add(fan.threegroup);
 }
 
+function createHouse() {
+  house = new House();
+  scene.add(house.threegroup);
+}
+
 Fan = function(){
   this.isBlowing = false;
   this.speed = 0;
@@ -211,6 +216,41 @@ Fan.prototype.update = function(xTarget, yTarget){
     this.speed *= .98;
   }
   this.propeller.rotation.z += this.speed;
+}
+
+House = function() {
+  this.whiteMat = new THREE.MeshLambertMaterial ({
+    color: 0xffffff,
+    shading:THREE.FlatShading
+  });
+  this.greyMat = new THREE.MeshLambertMaterial ({
+    color: 0x653f4c,
+    shading:THREE.FlatShading
+  });
+
+  var coreGeom = new THREE.BoxGeometry(1000,10,300);
+  var pillarGeom = new THREE.BoxGeometry(50, 450, 10);
+  var signGeom = new THREE.BoxGeometry(300, 75, 10);
+
+  this.core = new THREE.Mesh(coreGeom,this.greyMat);
+  this.pillar1 = new THREE.Mesh(pillarGeom,this.greyMat);
+  this.pillar2 = new THREE.Mesh(pillarGeom,this.greyMat);
+  this.sign = new THREE.Mesh(signGeom, this.whiteMat);
+
+  this.core.position.y = 300;
+  this.pillar1.position.x = 350;
+  this.pillar1.position.y = 100;
+  this.pillar2.position.x = -350;
+  this.pillar2.position.y = 100;
+  this.sign.position.x = -350;
+  this.sign.position.y = 120;
+  this.sign.position.z = 10;
+
+  this.threegroup = new THREE.Group();
+  this.threegroup.add(this.core);
+  this.threegroup.add(this.pillar1);
+  this.threegroup.add(this.pillar2);
+  this.threegroup.add(this.sign);
 }
 
 Lion = function(){
@@ -700,6 +740,7 @@ createLights();
 createFloor();
 createLion();
 createFan();
+createHouse();
 loop();
 
 

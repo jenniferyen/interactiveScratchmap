@@ -24,18 +24,16 @@
   font-size:.8em;
 }
 
-#credits{
+#location {
   position:absolute;
   width:100%;
+  top: 36%;
+  right: 20%;
   margin: auto;
-  bottom:0;
-  margin-bottom:20px;
   font-family:'Open Sans', sans-serif;
-  color:#b297a2;
-  font-size:0.7em;
+  color:#653f4c;
+  font-size:1.3em;
   text-transform: uppercase;
   text-align : center;
-}
-#credits a {
-  color:#b297a2;
+  user-select: none;
 }
