@@ -33,12 +33,12 @@ var fish,
     tooth2,
     tooth3,
     tooth4,
-    tooth5;
+    t
 
 // FISH SPEED
 // the colors are splitted into rgb values to facilitate the transition of the color
-var fishFastColor = {r:255, g:0, b:224}; // pastel blue
-		fishSlowColor = {r:0, g:207, b:255}; // purple
+var fishFastColor = {r:251, g:90, b:90}; // RED
+		fishSlowColor = {r:36, g:233, b:115}; // pastel blue
     angleFin = 0; // angle used to move the fishtail
 
 // PARTICLES COLORS
@@ -458,8 +458,6 @@ function flyParticle(){
   flyingParticles.push(particle);
  	scene.add(particle);
 }
-
-
 
 function getRandomColor(){
   var col = hexToRgb(colors[Math.floor(Math.random()*colors.length)]);

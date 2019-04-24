@@ -1,7 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
 
 #world{
-  background: linear-gradient(#8ee4ae, #e9eba3);
+  /* background: linear-gradient(#8ee4ae, #e9eba3); */
+  background: linear-gradient(#68C4E1, #e9eba3);
   position:absolute;
   width:100%;
   height:100%;
@@ -18,20 +19,4 @@
   font-size:1.2em;
   text-transform: uppercase;
   text-align : center;
-}
-
-#credits{
-  position:absolute;
-  width:100%;
-  margin: auto;
-  bottom:0;
-  margin-bottom:20px;
-  font-family:'Open Sans', sans-serif;
-  color:#71b583;
-  font-size:0.7em;
-  text-transform: uppercase;
-  text-align : center;
-}
-#credits a {
-  color:#71b583;
 }
