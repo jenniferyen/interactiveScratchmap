@@ -20,6 +20,7 @@ app.set('view engine', 'html');
 
 // set up bodyParser
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 // set up cookie session
 app.use(cookieSession({
