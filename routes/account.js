@@ -69,16 +69,19 @@ router.get('/logout', isAuthenticated, function (req, res, next) {
 
 function updateMap(mapString, newArea) {
   const mapTemp = JSON.parse(mapString)
-  // console.log(Object.values(newArea))
-  var newAreasTemp = Object.values(newArea);
-  var newAreasFinal = newAreasTemp.reduce(
+  // console.log(Object.keys(newArea)) => gives 2 letter code
+  // console.log(Object.values(newArea)) => gives attrs.fill.color info
+  const newAreasTemp = Object.values(newArea);
+  const newAreasFinal = newAreasTemp.reduce(
    function(reduced, next){
       Object.keys(next).forEach(function(key){reduced[key]=next[key];});
       return reduced;
    }
   );
   // console.log(newAreasFinal)
+  const tempAttrs = Object.keys(newArea)
   mapTemp.areas[Object.keys(newArea)[0]] = newAreasFinal
+  mapTemp.areas[Object.keys(newArea)].tooltip = {content: tempAttrs }
   // console.log(mapTemp)
   mapString = JSON.stringify(mapTemp)
   // console.log(mapString)
