@@ -65,14 +65,28 @@ router.get('/logout', isAuthenticated, function (req, res, next) {
   res.redirect('/');
 })
 
-router.post('/save', isAuthenticated, function(req, res, next) {
-  console.log(req.body)
-  User.findOneAndUpdate({_id: req.session.userId }, {$set:{ map: res.map }}, {upsert: true, new: true}, function(err, userInfo) {
-      if (err){
-          if (err) res.json(err);
-      }
-      console.log(userInfo);
-  });
+function updateMap(mapString, newArea) {
+  // code to update map
+  // return new mapString
+}
+
+router.post('/save', isAuthenticated, function(req, res) {
+  const userId = req.session.id
+  console.log(userId)
+
+  User.findById(userId)
+  .then(user => {
+    const map = user.map
+    user.map = updateMap(map, req.body)
+    return user.save()
+  })
+  .then(() => {
+    res.sendStatus(200)
+  })
+  .catch(error => {
+    console.log(error)
+    res.sendStatus(500)
+  })
 })
 
 var stringifiedMap = ''
